@@ -3,7 +3,7 @@
 		"_postman_id": "ed9e91b2-40d7-4b2d-ad55-b9e5df95acd6",
 		"name": "Test-Breeze-APIOnly",
 		"description": "# 🚀 Get started here\n\nThis template guides you through CRUD operations (GET, POST, PUT, DELETE), variables, and tests.\n\n## 🔖 **How to use this template**\n\n#### **Step 1: Send requests**\n\nRESTful APIs allow you to perform CRUD operations using the POST, GET, PUT, and DELETE HTTP methods.\n\nThis collection contains each of these [request](https://learning.postman.com/docs/sending-requests/requests/) types. Open each request and click \"Send\" to see what happens.\n\n#### **Step 2: View responses**\n\nObserve the response tab for status code (200 OK), response time, and size.\n\n#### **Step 3: Send new Body data**\n\nUpdate or add new data in \"Body\" in the POST request. Typically, Body data is also used in PUT request.\n\n```\n{\n    \"name\": \"Add your name in the body\"\n}\n\n ```\n\n#### **Step 4: Update the variable**\n\nVariables enable you to store and reuse values in Postman. We have created a [variable](https://learning.postman.com/docs/sending-requests/variables/) called `base_url` with the sample request [https://postman-api-learner.glitch.me](https://postman-api-learner.glitch.me). Replace it with your API endpoint to customize this collection.\n\n#### **Step 5: Add tests in the \"Scripts\" tab**\n\nAdding tests to your requests can help you confirm that your API is working as expected. You can write test scripts in JavaScript and view the output in the \"Test Results\" tab.\n\n<img src=\"https://content.pstmn.io/fa30ea0a-373d-4545-a668-e7b283cca343/aW1hZ2UucG5n\" alt=\"\" height=\"1530\" width=\"2162\">\n\n## 💪 Pro tips\n\n- Use folders to group related requests and organize the collection.\n    \n- Add more [scripts](https://learning.postman.com/docs/writing-scripts/intro-to-scripts/) to verify if the API works as expected and execute workflows.\n    \n\n## 💡Related templates\n\n[API testing basics](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9a37a28-055b-49cd-8c7e-97494a21eb54&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[API documentation](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9c28f47-1253-44af-a2f3-20dce4da1f18&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[Authorization methods](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=31a9a6ed-4cdf-4ced-984c-d12c9aec1c27&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "40379959"
 	},
 	"item": [
@@ -13,9 +13,6 @@
 				{
 					"name": "send-email-verification",
 					"request": {
-						"auth": {
-							"type": "noauth"
-						},
 						"method": "POST",
 						"header": [
 							{
@@ -31,14 +28,23 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\":\"hdhdhdhdh@example.com\"\r\n}",
+							"raw": "{\r\n    \"email\":\"latest@example.com\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "http://localhost:8000/email/verification-notification"
+						"url": {
+							"raw": "{{base_url}}/email/verification-notification",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"email",
+								"verification-notification"
+							]
+						}
 					},
 					"response": []
 				},
@@ -51,25 +57,23 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8000/verify-email/5/f3c917beeff10eea86a6c6ecffe30601fcecba89?expires=1745049639&signature=d761041f4ccfab4eb2a6c6025bfef18bd7f955d5591c12a98dc62b513e466f58",
-							"protocol": "http",
+							"raw": "{{base_url}}/verify-email/2/fa1d2242335c9c2a8e5d5187197e358ee748e969?expires=1745066480&signature=1fb0c73c50a099ced04ff1edc268eae61546eeff5226b405490248f99e25b9af",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "8000",
 							"path": [
 								"verify-email",
-								"5",
-								"f3c917beeff10eea86a6c6ecffe30601fcecba89"
+								"2",
+								"fa1d2242335c9c2a8e5d5187197e358ee748e969"
 							],
 							"query": [
 								{
 									"key": "expires",
-									"value": "1745049639"
+									"value": "1745066480"
 								},
 								{
 									"key": "signature",
-									"value": "d761041f4ccfab4eb2a6c6025bfef18bd7f955d5591c12a98dc62b513e466f58"
+									"value": "1fb0c73c50a099ced04ff1edc268eae61546eeff5226b405490248f99e25b9af"
 								}
 							]
 						}
@@ -136,7 +140,15 @@
 								}
 							}
 						},
-						"url": "{{base_url}}/forgot-password",
+						"url": {
+							"raw": "{{base_url}}/forgot-password",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"forgot-password"
+							]
+						},
 						"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
 					},
 					"response": []
@@ -194,14 +206,22 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"token\":\"a313c83a0b603fd3c3de0bff6fe5b470bbb679b3523f336b90ddc0737e457cf6\",\r\n    \"email\": \"new@example.com\",\r\n    \"password\": \"qwerty123\",\r\n    \"password_confirmation\": \"qwerty123\"\r\n}",
+							"raw": "{\r\n    \"token\":\"2e4d15dc6a2cb82e4922a845d1600eeff58320da1f39b788f68b2fa7c7156c1a\",\r\n    \"email\": \"new@example.com\",\r\n    \"password\": \"qwerty123\",\r\n    \"password_confirmation\": \"qwerty123\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "{{base_url}}/reset-password",
+						"url": {
+							"raw": "{{base_url}}/reset-password",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"reset-password"
+							]
+						},
 						"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
 					},
 					"response": []
@@ -261,14 +281,22 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"test\",\r\n    \"email\": \"latest@example.com\",\r\n    \"password\": \"123456789\",\r\n    \"password_confirmation\": \"123456789\"\r\n}",
+					"raw": "{\r\n    \"name\": \"test\",\r\n    \"email\": \"new@example.com\",\r\n    \"password\": \"123456789\",\r\n    \"password_confirmation\": \"123456789\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
 						}
 					}
 				},
-				"url": "{{base_url}}/register",
+				"url": {
+					"raw": "{{base_url}}/register",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"register"
+					]
+				},
 				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
 			},
 			"response": []
@@ -309,14 +337,22 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"email\": \"latest@example.com\",\n    \"password\": \"123456789\"\n}",
+					"raw": "{\n\t\"email\": \"new@example.com\",\n    \"password\": \"qwerty123\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
 						}
 					}
 				},
-				"url": "{{base_url}}/login",
+				"url": {
+					"raw": "{{base_url}}/login",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"login"
+					]
+				},
 				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
 			},
 			"response": []
@@ -340,16 +376,28 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "{{base_url}}/user"
+				"url": {
+					"raw": "{{base_url}}/user",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"user"
+					]
+				}
 			},
 			"response": []
 		}
 	],
 	"auth": {
 		"type": "bearer",
-		"bearer": {
-			"token": "4|mlzCw1W1qXthoym2S01OgSPlK1GSQZ0b1yxf5qcjf4228f0c"
-		}
+		"bearer": [
+			{
+				"key": "token",
+				"value": "3|2rEpBSWlOKYIl1vCTFLhFgKddNUJsd9Cd3DE1tR326f2756c",
+				"type": "string"
+			}
+		]
 	},
 	"event": [
 		{
@@ -378,7 +426,7 @@
 		},
 		{
 			"key": "base_url",
-			"value": ""
+			"value": "http://localhost:8000/api"
 		}
 	]
 }
