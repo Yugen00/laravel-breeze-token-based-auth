@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 
 // Public (unauthenticated) routes
 Route::middleware('guest')->group(function () {
-    Route::post('/register', [RegisteredUserController::class, 'store'])->name('register');
+    Route::post('/signup', [RegisteredUserController::class, 'store'])->name('register');
     Route::post('/login', [AuthenticatedSessionController::class, 'store'])->name('login');
     Route::post('/forgot-password', [PasswordResetLinkController::class, 'store'])->name('password.email');
     Route::post('/reset-password', [NewPasswordController::class, 'store'])->name('password.store');
@@ -41,10 +41,13 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', function (Request $request) {
         $user = $request->user();
         return response()->json([
-            'id'=>$user->id,
-            'name'=> $user->name,
-            'email'=> $user->email,
-            'email_verified_at'=> $user->email_verified_at
+            'authenticated'=> true,
+            'user'=>[
+                'id'=>$user->id,
+                'name'=> $user->name,
+                'email'=> $user->email,
+                'email_verified_at'=> $user->email_verified_at
+            ]
         ]);
     });
     Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');

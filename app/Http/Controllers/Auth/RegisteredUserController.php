@@ -43,7 +43,7 @@ class RegisteredUserController extends Controller
             return response()->json([
                 'success' => 'true',
                 'message' => 'Verification link sent to your email address.',
-            ], 201);
+            ], 403);
         }
 
         // ----------- Else, without MustVerifyEmail implementation
